@@ -12,4 +12,21 @@ app.post("/register", async (req, resp)=> {
     let result = await user.save()
     resp.send(result)  
 })
+
+app.post("/login", async (req, resp)=>{
+    if(req.body.password && req.body.email){
+        let user = await User.findOne(req.body)
+        if(user){
+            resp.send(user)
+        }else{
+            resp.send({result: 'No User Found'})
+        }
+    }else{
+        resp.send({result: 'No User Found'})
+    }
+
+
+    
+})
+
 app.listen(5003) 
